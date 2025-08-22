@@ -24,7 +24,7 @@ const loadBalancer = (req, res, next) => {
     }
 
     // Forward the request to the selected server
-    const proxy = httpProxy.createProxyServer({});
+    const proxy = httpProxy.createProxyServer({ xfwd: false });
     proxy.web(req, res, { target: server }, (err) => {
         console.error('Error proxying request:', err);
         res.status(502).send('Bad Gateway');
